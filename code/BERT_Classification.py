@@ -1,13 +1,25 @@
 import torch
-from transformers import pipeline, BertTokenizer
+from transformers import pipeline
 import preprocessing
 df, tfidf_matrix, feature_names = preprocessing.preprocess_data()
 tweets = df["tweet"]
-tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
+sentiments = df["sentiment"]
 
-print("start")
-tokenized_tweets = [tokenizer.tokenize(tweet) for tweet in tweets]
+sentiment_analyzer = pipeline(
+    "sentiment-analysis",
+    model="distilbert-base-uncased-finetuned-sst-2-english"
+)
+accuracy = 0 #number of correct sentiments
+count = 0 #number of sentiments found
+for tweet, sentiment in zip(tweets, sentiments):
+    count+= 1
+    result = sentiment_analyzer(tweet)
+    print(count)
+    if(result[0]["label"] == sentiment):
+        accuracy += 1
+    
+#finds true accuracy
+accuracy = accuracy / count
+print(accuracy)
 
 
-print(tweets)
-print("done")

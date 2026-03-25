@@ -1,1 +1,1 @@
-Lorem Ipsum so on and so forth
+https://machinelearningmastery.com/a-complete-introduction-to-using-bert-models/

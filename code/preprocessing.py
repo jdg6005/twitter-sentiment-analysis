@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 def preprocess_data():
-    df = pd.read_csv("../data/twitter_training.csv", header=None) # path to data
+    df = pd.read_csv("./data/twitter_training.csv", header=None) # path to data
     df.columns = ["id", "entity", "sentiment", "tweet"] # naming columns for easier access
     df = df.dropna()
 
@@ -16,4 +16,6 @@ def preprocess_data():
     feature_names = vectorizer.get_feature_names_out()
     print("Feature Names:", feature_names)
     return df, tfidf_matrix, feature_names
+
+
 
